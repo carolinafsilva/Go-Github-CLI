@@ -1,0 +1,6 @@
+#!/bin/sh
+
+egrep -q '^(build|chore|ci|docs|feat|fix|perf|refactor|revert|style|test){1}(\([[:alnum:]._-]+\))?(!)?: ([[:space:][:print:]]*)' $1 || {
+	echo >&2 'commit message does not match regex: ^(build|chore|ci|docs|feat|fix|perf|refactor|revert|style|test){1}(\([[:alnum:]._-]+\))?(!)?: ([[:space:][:print:]]*)'
+	exit 1
+}
