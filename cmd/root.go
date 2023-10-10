@@ -3,10 +3,15 @@ package cmd
 import (
 	"os"
 
+	"github.com/fatih/color"
 	"github.com/spf13/cobra"
 )
 
-var githubUser string
+var (
+	githubUser string
+	fg         = color.New()
+	magenta    = color.New(color.FgMagenta)
+)
 
 var rootCmd = &cobra.Command{
 	Use:   "gg <command> [subcommand] [flags]",
@@ -15,6 +20,7 @@ var rootCmd = &cobra.Command{
 }
 
 func Execute() {
+	color.NoColor = false
 	err := rootCmd.Execute()
 	if err != nil {
 		os.Exit(1)
