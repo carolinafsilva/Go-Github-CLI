@@ -22,7 +22,7 @@ docker pull carolinafsilva/go-github-cli
 ```bash
 docker run --rm -e GITHUB_ACCESS_TOKEN=<token> carolinafsilva/go-github-cli gg [command]
 ```
-Replace `[command]`` with the specific gg command you want to use.
+Replace `[command]` with the specific gg command you want to use.
 
 Notice you need to pass your GitHub access token as an environment variable. If you do not have one, you can generate one in [https://github.com/settings/tokens](https://github.com/settings/tokens).
 
