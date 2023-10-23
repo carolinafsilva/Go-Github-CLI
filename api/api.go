@@ -71,12 +71,12 @@ func GetOwnedRepos(username string, size int) ([]*github.Repository, error) {
 
 	page := 1
 	pageSize := pageSizeMax
+	if size < pageSize {
+		pageSize = size
+	}
 	var repos []*github.Repository
 
 	for size > 0 {
-		if size < pageSize {
-			pageSize = size
-		}
 
 		options := github.RepositoryListOptions{ListOptions: github.ListOptions{Page: page, PerPage: pageSize}}
 		res, _, err := client.Repositories.List(context.Background(), username, &options)
@@ -102,13 +102,12 @@ func GetFollowedRepos(username string, size int) ([]*github.Repository, error) {
 
 	page := 1
 	pageSize := pageSizeMax
+	if size < pageSize {
+		pageSize = size
+	}
 	var repos []*github.Repository
 
 	for size > 0 {
-		if size < pageSize {
-			pageSize = size
-		}
-
 		options := github.ListOptions{Page: page, PerPage: pageSize}
 		res, _, err := client.Activity.ListWatched(context.Background(), username, &options)
 		if err != nil {
@@ -158,12 +157,12 @@ func ListPRsByRepo(repoPath string, size int) ([]*github.PullRequest, error) {
 
 	page := 1
 	pageSize := pageSizeMax
+	if size < pageSize {
+		pageSize = size
+	}
 	var prs []*github.PullRequest
 
 	for size > 0 {
-		if size < pageSize {
-			pageSize = size
-		}
 
 		options := github.PullRequestListOptions{State: "open", Sort: "created", Direction: "desc", ListOptions: github.ListOptions{Page: page, PerPage: pageSize}}
 		res, _, err := client.PullRequests.List(context.Background(), owner, repo, &options)
@@ -231,12 +230,12 @@ func ListPRsByAuthor(author string, size int) ([]*github.Issue, error) {
 
 	page := 1
 	pageSize := pageSizeMax
+	if size < pageSize {
+		pageSize = size
+	}
 	var prs []*github.Issue
 
 	for size > 0 {
-		if size < pageSize {
-			pageSize = size
-		}
 
 		options := &github.SearchOptions{Sort: "created", Order: "desc", ListOptions: github.ListOptions{Page: page, PerPage: pageSize}}
 		res, _, err := client.Search.Issues(context.Background(), fmt.Sprintf("is:pr author:%s", author), options)
